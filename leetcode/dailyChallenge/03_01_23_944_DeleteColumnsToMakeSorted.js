@@ -18,3 +18,6 @@ var isNotLexicographicallySorted = function (col, strs) {
 var getCharCode = function (c) {
   return c.charCodeAt(0) - "a".charCodeAt(0);
 };
+
+const strs = ["abc", "def", "xyz"];
+console.log(minDeletionSize(strs));
