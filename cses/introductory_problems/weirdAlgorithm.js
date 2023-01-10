@@ -35,7 +35,6 @@ const log = function (text) {
 
 const end = function () {
   process.stdout.write("\n");
-  // process.exit(0);
 };
 
 const weirdAlgorithm = function (input) {
@@ -50,17 +49,3 @@ const weirdAlgorithm = function (input) {
     end();
   }
 };
-
-// const weirdAlgorithm = function (n) {
-//   const n = parseInt(input[i]);
-//   const output = [];
-//   while (n !== 1) {
-//     if (n % 2 === 0) n = n / 2;
-//     else n = n * 3 + 1;
-//     output.push(n);
-//   }
-//   return output;
-// };
-//
-// const n = 3;
-// console.log(weirdAlgorithm(n));
