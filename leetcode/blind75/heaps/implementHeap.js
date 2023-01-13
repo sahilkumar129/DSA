@@ -160,3 +160,87 @@ module.exports = { MinHeap, MaxHeap };
 // maxHeap.pop();
 // maxHeap.pop();
 // maxHeap.pop();
+
+var swap = function (arr, i, j) {
+  const temp = arr[j];
+  arr[j] = arr[i];
+  arr[i] = temp;
+};
+
+const Heap = function (cmp) {
+  this.elements = [];
+  this.cmp = cmp ?? ((a, b) => a - b);
+};
+
+Heap.prototype.size = function () {
+  return this.elements.length;
+};
+
+Heap.prototype.top = function () {
+  return this.elements?.[0] ?? null;
+};
+
+Heap.prototype.push = function (val) {
+  this.elements.push(val);
+  this.pushHeapify();
+};
+
+Heap.prototype.pop = function () {
+  const val = this.elements?.[0] ?? null;
+  if (val === null) return val;
+  this.elements[0] = this.elements[this.elements.length - 1];
+  this.elements.pop();
+  this.popHeapify();
+  return val;
+};
+
+Heap.prototype.pushHeapify = function () {
+  let curr = this.elements.length - 1,
+    parent;
+  while (curr > 0) {
+    parent = Math.floor((curr - 1) / 2);
+    if (this.cmp(this.elements[curr], this.elements[parent]) < 0) swap(this.elements, curr, parent);
+    else break;
+    curr = parent;
+  }
+};
+
+Heap.prototype.popHeapify = function () {
+  let curr = 0,
+    left,
+    right,
+    next = curr;
+  while (curr < this.elements.length - 1) {
+    left = 2 * curr + 1;
+    right = 2 * curr + 2;
+    if (left < this.elements.length && this.cmp(this.elements[left], this.elements[curr]) < 0)
+      next = left;
+    if (right < this.elements.length && this.cmp(this.elements[right], this.elements[next]) < 0)
+      next = right;
+    if (next === curr) break;
+    swap(this.elements, curr, next);
+    curr = next;
+  }
+};
+
+const maxHeap = new Heap((a, b) => b - a);
+maxHeap.push(1);
+console.log(maxHeap.elements);
+maxHeap.push(8);
+console.log(maxHeap.elements);
+maxHeap.push(4);
+console.log(maxHeap.elements);
+maxHeap.pop();
+console.log(maxHeap.elements);
+maxHeap.push(2);
+console.log(maxHeap.elements);
+maxHeap.push(2);
+console.log(maxHeap.elements);
+maxHeap.push(2);
+console.log(maxHeap.elements);
+maxHeap.pop();
+console.log(maxHeap.elements);
+maxHeap.pop();
+maxHeap.pop();
+maxHeap.pop();
+maxHeap.pop();
