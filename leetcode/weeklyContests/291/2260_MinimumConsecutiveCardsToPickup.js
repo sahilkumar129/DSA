@@ -3,16 +3,15 @@
  * @return {number}
  */
 var minimumCardPickup = function (cards) {
-  let ans = Infinity,
-    indexMap = new Map();
+  const MAX_LEN = cards.length + 1;
+  let ans = MAX_LEN,
+    minDiffMap = new Map();
   for (let i = 0; i < cards.length; i++) {
-    if (!indexMap.has(cards[i])) indexMap.set(cards[i], i);
-    else {
-      ans = Math.min(ans, i - indexMap.get(cards[i]) + 1);
-      indexMap.set(cards[i], i);
-    }
+    const cardVal = minDiffMap.get(cards[i]);
+    if (cardVal != undefined) ans = Math.min(ans, i - cardVal + 1);
+    minDiffMap.set(cards[i], i);
   }
-  return ans === Infinity ? -1 : ans;
+  return ans == MAX_LEN ? -1 : ans;
 };
 
 const cards = [3, 4, 2, 3, 4, 7];
